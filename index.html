@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f1f5fa">
+<meta name="description" content="StatCannon 统计大炮 — 卫生统计学学习游戏：打炮答题、统计百斩五环节学习、薄弱点分析、个性化学习方案">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="统计大炮">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>StatCannon 统计大炮 · 16学时研究生课堂</title>
+<script src="knowledge.js"></script>
+<script src="baizhan_data.js"></script>
+<script src="baizhan_engine.js"></script>
+<link rel="stylesheet" href="academy/legacy.css">
+<link rel="stylesheet" href="academy/academy.css">
+<link rel="stylesheet" href="academy/light.css">
+<link rel="stylesheet" href="academy/textbook.css">
+</head>
+<body>
+<div style="padding:8px 16px;text-align:center;font-size:14px">独立部署版 · 学习档案保存在当前浏览器，可导出备份。账号学习曲线仅在Sites版本提供。</div>
+
+<!-- ===== 顶部导航 ===== -->
+<div id="top-bar">
+  <div class="logo">🎯 StatCannon <small>v4.1</small>
+    <span style="font-size:12px;color:var(--dim);-webkit-text-fill-color:var(--dim);margin-left:8px">卫生统计学学习游戏</span>
+  </div>
+  <div id="top-nav">
+    <button class="active" onclick="switchPage('learn')">📖 学习</button>
+    <button onclick="switchPage('cannon')">🎮 打炮测试</button>
+    <button onclick="switchPage('weakness')">📊 薄弱点</button>
+    <button onclick="switchPage('plan')">📋 方案</button>
+    <button onclick="switchPage('rank')">🏆 排名</button>
+    <button onclick="switchPage('settings')">⚙️ 设置</button>
+    <span id="review-badge" style="display:none;background:#ef4444;color:#fff;padding:2px 12px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer" onclick="startReviewMode()">📚 0</span>
+    <button onclick="switchPage('resources')">📚 资源</button>
+    
+  </div>
+</div>
+
+<!-- ===== 主容器 ===== -->
+<div id="main">
+
+<!-- ==================== 学习页面 ==================== -->
+<div id="page-learn" class="page active">
+  <div class="card">
+    <h2>📚 知识树</h2>
+    <div class="learning-guide">
+      <p>👉 建议按从上到下顺序学习，不要直接跳高阶模块；预测模型／预后研究重点关注：回归、Cox、GEE/GLMM。</p>
+      <p>原创临床研究：围绕患者数据开展研究，包括临床研究设计、回归、Cox、GEE和诊断试验。IBD随访、肺癌预后预测模型属于这一类。</p>
+      <p>二次研究：Meta分析整合已有研究证据，在最后一个模块单独学习。</p>
+      <p>软件实操集中在基础理论之后的“软件实操与论文”。每学完一个统计知识点，可前往该模块同步练习，再回到当前学习进度。</p>
+    </div>
+    <p style="color:var(--dim);font-size:14px;margin-bottom:12px">
+      卫生统计学 <strong id="total-modules"></strong> 大模块，<strong id="total-topics"></strong> 个知识点，<strong id="total-questions"></strong> 道练习题。<br><span id="question-bank-summary" style="font-size:14px"></span>
+      点击模块展开学习，完成后可进入"打炮测试"巩固。
+    </p>
+    <div class="flex flex-wrap gap-4" style="margin-bottom:12px">
+      <button class="btn btn-primary btn-sm" onclick="expandAllTopics()">展开全部</button>
+      <button class="btn btn-dim btn-sm" onclick="collapseAllTopics()">收起全部</button>
+      <span style="font-size:13px;color:var(--dim);margin-left:8px" id="overall-progress"></span>
+    </div>
+  </div>
+  <div id="module-container" class="module-grid"></div>
+</div>
+
+<!-- ==================== 打炮测试页面 ==================== -->
+<div id="page-cannon" class="page">
+  <div class="card">
+    <div class="flex" style="justify-content:space-between;flex-wrap:wrap;gap:8px">
+      <h2>🎮 打炮测试</h2>
+      <div class="flex gap-4">
+        <button class="btn btn-success btn-sm" onclick="startCannonGame()">🔫 开始游戏</button>
+        <button class="btn btn-dim btn-sm" onclick="endCannonGame()">⏹ 结束</button>
+      </div>
+    </div>
+    <p style="color:var(--dim);font-size:13px;margin-top:8px">
+      每轮最多10题，优先未见题，穿插少量错题。手机轻点选项开炮；电脑移动鼠标瞄准后点击。
+    </p>
+    <div id="cannon-controls" class="flex flex-wrap gap-4" style="margin:12px 0">
+      <select id="cannon-module-select" style="background:#1a2030;border:1px solid rgba(255,255,255,0.18);border-radius:8px;padding:8px 12px;color:#f1f5fb;font-size:13px;flex:1;min-width:140px">
+        <option value="all">全部模块随机</option>
+      </select>
+      <select id="cannon-topic-select" style="background:#1a2030;border:1px solid rgba(255,255,255,0.18);border-radius:8px;padding:8px 12px;color:#f1f5fb;font-size:13px;flex:1;min-width:140px">
+        <option value="all">全部知识点</option>
+      </select>
+      <select id="cannon-difficulty" style="background:#1a2030;border:1px solid rgba(255,255,255,0.18);border-radius:8px;padding:8px 12px;color:#f1f5fb;font-size:13px;flex:1;min-width:110px">
+        <option value="all">全部难度</option>
+        <option value="weak">仅薄弱点</option>
+      </select>
+      <span id="game-remaining" style="font-size:13px;color:var(--dim);display:flex;align-items:center">未开始</span>
+    </div>
+  </div>
+
+  <!-- 题目显示区：显眼位置，大字加粗 -->
+  <div id="cannon-question">
+    <div class="cq-tag" id="cq-tag">答题</div>
+    <div class="cq-text" id="cq-text">请先点击「开始游戏」</div>
+    <div class="cq-progress" id="cq-progress"></div>
+  </div>
+
+  <!-- 打炮场景 -->
+  <div id="cannon-scene">
+    <div class="ground"></div>
+    <div class="ground-line"></div>
+    <div class="haze"></div>
+    <!-- 写实大炮（CSS 拼装） -->
+    <div id="cannon-wrapper">
+      <div id="cannon-barrel"></div>
+      <div id="cannon-body"></div>
+      <div id="cannon-wheel"></div>
+    </div>
+    <div id="cannon-muzzle-flash"></div>
+    <div id="game-hud">
+      <div class="info-item"><span class="label">状态</span><br><span class="val" id="hud-status">待开始</span></div>
+      <div class="info-item"><span class="label">当前</span><br><span class="val" id="hud-current">-</span></div>
+      <div class="info-item"><span class="label">本题用时</span><br><span class="val" id="qtimer">--</span></div>
+      <button class="btn btn-dim btn-sm" id="pause-btn" onclick="togglePause()" style="height:44px">⏸ 暂停</button>
+    </div>
+    <div id="game-score">
+      <div style="font-size:12px;color:var(--dim)">得分</div>
+      <div class="score-num" id="score-display">0</div>
+      <div class="combo" id="combo-display">🔥 x1</div>
+      <div id="live-accuracy" aria-live="polite">正确率 — · 0/0</div>
+    </div>
+    <!-- 候选项动态生成 -->
+    <div id="cannon-options"></div>
+    <!-- 瞄准辅助线（从炮口指向鼠标） -->
+    <div id="cannon-aim-line"></div>
+    <!-- 答题结果 -->
+    <div id="cannon-result">
+      <div class="cr-head" id="cr-head"></div>
+      <div class="cr-pts" id="cr-pts"></div>
+      <div class="cr-explain" id="cr-explain"></div>
+      <a id="cr-learn-link" class="btn btn-dim" hidden style="margin-top:12px" href="#legacy-learn">知识树</a>
+      <div style="margin-top:14px">
+        <button class="btn btn-primary" id="cr-next-btn" style="display:none">下一题 →</button>
+      </div>
+    </div>
+    <!-- 本局战报 -->
+    <div id="game-summary">
+      <div class="gs-box">
+        <div class="gs-title" id="gs-title">🎮 本局战报</div>
+        <div class="gs-stats" id="gs-stats"></div>
+        <div class="gs-badges" id="gs-badges"></div>
+        <div style="margin-top:22px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="startCannonGame()">🔫 再来一局</button>
+          <button class="btn btn-dim" onclick="closeGameSummary()">✕ 关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 薄弱点页面 ==================== -->
+<div id="page-weakness" class="page">
+  <div class="card">
+    <h2>📊 薄弱点分析</h2>
+    <p style="color:var(--dim);font-size:14px">基于你的答题记录，按知识点模块统计掌握率，红色为薄弱环节。</p>
+    <div id="weakness-chart"></div>
+    <div style="margin-top:16px">
+      <button class="btn btn-primary btn-sm" onclick="generateWeaknessPlan()">📋 生成个性化学习方案</button>
+      <button class="btn btn-dim btn-sm" onclick="clearHistory()">🗑 清空历史</button>
+    </div>
+  </div>
+  <div id="plan-output" style="display:none"></div>
+</div>
+
+<!-- ==================== 学习方案页面 ==================== -->
+<div id="page-plan" class="page">
+  <div class="card">
+    <h2>📋 个性化学习方案</h2>
+    <p style="color:var(--dim);font-size:14px">根据学习档案和薄弱点分析，自动生成定制学习方案。</p>
+    <div id="plan-actions" class="flex flex-wrap gap-4" style="margin:12px 0">
+      <button class="btn btn-primary" onclick="generateFullPlan()">🔄 生成最新方案</button>
+      <button class="btn btn-success" onclick="startAutoTest()">🎯 开始自动测试</button>
+      <button class="btn btn-dim" onclick="sendSMSReminder()">📱 发送学习提醒</button>
+    </div>
+    <div id="plan-output-full"></div>
+  </div>
+</div>
+
+<!-- ==================== 统计百斩·5环节学习页面 ==================== -->
+<div id="page-study" class="page">
+  <div class="card">
+    <div class="flex" style="justify-content:space-between;align-items:center;margin-bottom:12px">
+      <h2>🗡️ 统计百斩 · 五环节学习</h2>
+      <span style="font-size:12px;color:var(--dim)" id="study-tag"></span>
+    </div>
+    <div id="study-content"></div>
+  </div>
+</div>
+
+<!-- ==================== 排名页面 ==================== -->
+<div id="page-rank" class="page">
+  <div class="card">
+    <h2>🏆 学习排名</h2>
+    <p style="color:var(--dim);font-size:14px">按答题正确率、完成题数、连击记录综合排名。</p>
+    <div id="rank-content"></div>
+  </div>
+</div>
+
+<!-- ==================== 设置页面 ==================== -->
+<div id="page-settings" class="page">
+  <div class="card">
+    <h2>⚙️ 设置</h2>
+    <div id="settings-form">
+      <label>👤 你的姓名</label>
+      <input type="text" id="set-name" placeholder="输入姓名用于排名" onchange="saveSettings()">
+      <label>📚 本科专业背景</label>
+      <select id="set-major" onchange="saveSettings()">
+        <option value="non-medical">非预防医学（跨专业）</option>
+        <option value="preventive">预防医学/公卫</option>
+        <option value="clinical">临床医学</option>
+        <option value="other">其他</option>
+      </select>
+      <label>🎯 每日学习目标（分钟）</label>
+      <input type="number" id="set-daily" value="20" min="5" max="120" onchange="saveSettings()">
+      <label>🔊 游戏音效</label>
+      <button type="button" id="set-sfx-toggle" class="btn"
+        style="width:auto;justify-content:flex-start;background:#1a2030;border:1px solid rgba(255,255,255,0.18);color:var(--text)"
+        onclick="toggleSfxSetting()">🔊 音效：开</button>
+      <label style="margin-top:12px">🔈 音量</label>
+      <input type="range" id="set-sfx-volume" min="0" max="100" value="60" oninput="onSfxVolumeInput(this.value)">
+      <label>📱 手机号（用于短信提醒，选填）</label>
+      <input type="text" id="set-phone" placeholder="如 13800138000" onchange="saveSettings()">
+      <div style="margin-top:16px;padding:16px;background:rgba(245,158,11,0.05);border-radius:8px;border:1px solid rgba(245,158,11,0.15)">
+        <h3 style="font-size:14px;margin-bottom:8px;color:var(--accent)">📱 阿里云短信服务（已预留接口）</h3>
+        <p style="font-size:12px;color:var(--dim);margin-bottom:8px">配置后系统可自动发送学习提醒、薄弱点通知和测试结果。</p>
+        <label>AccessKey ID</label>
+        <input type="text" id="set-sms-key" placeholder="your-access-key-id" onchange="saveSettings()">
+        <label>AccessKey Secret</label>
+        <input type="password" id="set-sms-secret" placeholder="your-access-key-secret" onchange="saveSettings()">
+        <label>短信签名</label>
+        <input type="text" id="set-sms-sign" value="卫生统计学习" onchange="saveSettings()">
+        <label>短信模板ID</label>
+        <input type="text" id="set-sms-template" placeholder="SMS_xxxxxx" onchange="saveSettings()">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 资源页面（新增） ==================== -->
+<div id="page-progress" class="page" style="padding:16px;max-width:1200px;width:100%;margin:auto"></div>
+<div id="page-resources" class="page">
+  <div class="card">
+    <h2>📚 配套学习资源</h2>
+    <p style="color:var(--dim);font-size:14px">三大可视化+理论平台，点击链接直接打开，与当前知识点联动学习。</p>
+  </div>
+  <div id="resources-container"></div>
+</div>
+
+</div>
+
+<footer id="developer-footer">
+  <p>开发者：北京大学深圳医院 徐老师</p>
+  <p>欢迎交流使用建议、参与完善或洽谈合作。</p>
+  <a href="mailto:xjjcmu@163.com">xjjcmu@163.com</a>
+</footer>
+
+<!-- ===== 题目弹窗（知识点测试/自动测试用） ===== -->
+<div id="question-overlay">
+  <div id="question-box">
+    <div class="q-header">
+      <span id="q-module-label"></span>
+      <span id="q-progress" style="color:var(--dim)">1/1</span>
+    </div>
+    <div class="q-text" id="q-text"></div>
+    <div class="q-options" id="q-options"></div>
+    <div class="q-explain" id="q-explain"></div>
+    <div class="q-nav">
+      <button class="btn btn-dim" onclick="closeQuestion()">✕ 关闭</button>
+      <button class="btn btn-primary" id="q-next-btn" style="display:none">下一题 →</button>
+    </div>
+  </div>
+</div>
+
+<script src="academy/extend.js"></script>
+<script src="academy/question-bank.js"></script>
+<script src="academy/practice-queue.js"></script>
+<script src="academy/option-feedback-data.js"></script>
+<script src="academy/option-feedback.js"></script>
+<script src="academy/legacy.js"></script>
+<script src="academy/content.js"></script>
+<script src="academy/curriculum.js"></script>
+<script src="academy/core.js"></script>
+
+<script src="academy/textbook-engine.js"></script>
+<script src="academy/textbook-ui.js"></script>
+<script src="academy/app.js"></script>
+<script src="academy/learning-loop.js"></script>
+</body>
+</html>

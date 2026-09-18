@@ -1,0 +1,32 @@
+{
+  "name": "StatCannon 统计大炮",
+  "short_name": "统计大炮",
+  "description": "卫生统计学学习游戏：打炮答题巩固知识点，含统计百斩五环节学习、薄弱点分析、个性化学习方案。",
+  "lang": "zh-CN",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f1f5fa",
+  "theme_color": "#f1f5fa",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
