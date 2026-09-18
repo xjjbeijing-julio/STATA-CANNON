@@ -1,0 +1,17 @@
+# D06 学生AI Prompt
+
+研究问题：New治疗与Standard治疗的总体生存是否不同？
+
+请完成：
+1. 正确定义Time_months、Status和删失；
+2. 绘制Kaplan-Meier曲线并给出risk table思路；
+3. 做Log-rank检验；
+4. 建立Cox比例风险模型，调整Age和Stage；
+5. **必须检查比例风险（PH）假设**，不能看到一个HR就结束；
+6. 如果PH假设不成立，请检查治疗效应是否随时间改变；
+7. 可在18个月前后进行分段描述或建立time-varying effect；
+8. 解释为什么此时单一HR可能产生误导；
+9. 给出更合理的论文报告方式；
+10. 不允许把HR解释为死亡概率比。
+
+请生成R代码，优先使用survival包。

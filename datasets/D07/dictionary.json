@@ -1,0 +1,11 @@
+{
+  "description": "与119页V3课件配套的原始学生数据：D07_Diagnostic_student.csv。保留未经清洗的教学记录。",
+  "fields": {
+    "ID": "Participant ID；Identifier；R001...；Do not model",
+    "Split": "Predefined analysis split；Category；Train/Test；Validation role",
+    "Disease": "Reference standard disease status；Binary；1=disease,0=no disease；Outcome/reference",
+    "Age": "Age；Continuous；years；Covariate",
+    "Sex": "Sex；Binary；Male/Female；Covariate",
+    "Biomarker": "Index biomarker value；Continuous；arbitrary units；Diagnostic marker"
+  }
+}

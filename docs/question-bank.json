@@ -1,0 +1,69 @@
+{
+  "date": "2026-09-10",
+  "status": "automated-structure-and-calculation-checked; not independently expert reviewed",
+  "originalPreserved": 171,
+  "newConcepts": 172,
+  "calculationFamilies": 35,
+  "calculationVariants": 490,
+  "total": 833,
+  "byTopic": {
+    "t1": 4,
+    "t2": 4,
+    "t3": 74,
+    "t4": 32,
+    "t5": 4,
+    "t6": 46,
+    "t7": 4,
+    "t8": 18,
+    "t9": 18,
+    "t10": 32,
+    "t11": 4,
+    "t12": 4,
+    "t13": 32,
+    "t14": 32,
+    "t15": 4,
+    "t16": 4,
+    "t17": 4,
+    "t18": 18,
+    "t19": 4,
+    "t20": 4,
+    "t21": 4,
+    "t22": 4,
+    "t23": 4,
+    "t24": 4,
+    "t25": 18,
+    "t26": 18,
+    "t27": 4,
+    "t28": 18,
+    "t29": 4,
+    "t30": 46,
+    "t31": 18,
+    "t32": 60,
+    "t33": 4,
+    "t34": 4,
+    "t35": 32,
+    "t36": 18,
+    "t37": 4,
+    "t38": 18,
+    "t39": 4,
+    "t40": 4,
+    "t41": 4,
+    "t42": 18,
+    "t43": 4
+  },
+  "provenance": "Newly authored questions; not recovered historical 800-question file; no verbatim third-party question import.",
+  "references": [
+    {
+      "url": "https://mengte.online/",
+      "role": "User-requested topic navigation; not a verified downloadable MCQ bank"
+    },
+    {
+      "url": "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html",
+      "role": "t test and interval reference"
+    },
+    {
+      "url": "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/glm.html",
+      "role": "generalized linear model reference"
+    }
+  ]
+}

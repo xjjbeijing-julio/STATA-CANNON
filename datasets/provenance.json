@@ -1,0 +1,44 @@
+[
+  {
+    "id": "D01",
+    "source": "D01_Hypertension_student.csv",
+    "rows": 180,
+    "sha256": "7cf6c14601ece7b95f68d92943f4b9d91c261c2aa2ed2d5c58520cc0fc022345"
+  },
+  {
+    "id": "D02",
+    "source": "D02_DataCleaning_student.csv",
+    "rows": 121,
+    "sha256": "5463cf60a3a2a2f929b6807962f962f1e3052537f65c7ec4de7f3ff633231df7"
+  },
+  {
+    "id": "D03",
+    "source": "D03_Diabetes_student.csv",
+    "rows": 320,
+    "sha256": "35df44aa6c813b12cacc505042298f92cabd1c4444143b846d3efdcd4d35cf69"
+  },
+  {
+    "id": "D04",
+    "source": "D04_Hypertension3Arms_student.csv",
+    "rows": 240,
+    "sha256": "868b1a801b4bcf8f7ccb3121508ecf4bf6cc539418a5b25e0478d7ef473516d8"
+  },
+  {
+    "id": "D05",
+    "source": "D05_ClinicalOutcome_student.csv",
+    "rows": 600,
+    "sha256": "8c1b20a41b500b932235f413503f6e9d834572dc22b1b096ca4306ab2d64e453"
+  },
+  {
+    "id": "D06",
+    "source": "D06_CancerSurvival_student.csv",
+    "rows": 520,
+    "sha256": "4d4016b54fc92ed37419438305cbd7b80ad4360453ada83c30268b7d6b698aec"
+  },
+  {
+    "id": "D07",
+    "source": "D07_Diagnostic_student.csv",
+    "rows": 500,
+    "sha256": "cef7611b4ecdebec4ee76031e64855f37df5d269fd201af86d5e256efd6fca31"
+  }
+]

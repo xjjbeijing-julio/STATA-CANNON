@@ -1,0 +1,16 @@
+# D05 学生AI Prompt
+
+研究问题：Intensive治疗与术后Complication是否相关？
+
+请严格分两阶段分析：
+1. 先做未经调整的2×2表、并发症率和粗OR；
+2. 检查两种治疗组的Stage、Age、Smoking等基线分布；
+3. 根据临床/因果逻辑识别潜在混杂因素，不允许只用单因素P<0.05筛选；
+4. 建立多因素Logistic回归；
+5. 对比crude OR与adjusted OR的方向和大小；
+6. 如果方向发生改变，请解释为什么；
+7. 明确区分“调整后关联”与“治疗因果效应”；
+8. 输出规范的回归表和Results文字；
+9. 最后以Reviewer身份判断是否存在confounding by indication。
+
+生成可运行R代码。

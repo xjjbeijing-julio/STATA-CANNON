@@ -1,0 +1,17 @@
+{
+  "description": "与119页V3课件配套的原始学生数据：D02_DataCleaning_student.csv。保留未经清洗的教学记录。",
+  "fields": {
+    "ID": "Participant identifier；Text；Unique",
+    "Sex": "Sex；Category；Male/Female",
+    "Age": "Age；Integer；18-100 years",
+    "Height_cm": "Height；Continuous；130-220 cm",
+    "Weight_kg": "Weight；Continuous；30-250 kg",
+    "BMI": "Body mass index；Continuous；Plausibly 10-70; should agree with height/weight",
+    "Admission_date": "Admission date；Date；ISO date",
+    "Surgery_date": "Surgery date；Date；On/after admission",
+    "Discharge_date": "Discharge date；Date；On/after surgery",
+    "Smoking": "Current smoking；Category；Yes/No",
+    "Stage": "Disease stage；Ordered category；I/II/III/IV",
+    "SBP": "Systolic blood pressure；Continuous；Plausibly 60-300 mmHg"
+  }
+}

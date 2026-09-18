@@ -1,0 +1,11 @@
+{
+  "description": "与119页V3课件配套的原始学生数据：D04_Hypertension3Arms_student.csv。保留未经清洗的教学记录。",
+  "fields": {
+    "ID": "Participant identifier；Identifier；T001...",
+    "Group": "Treatment arm；3-category；A/B/C",
+    "Age": "Age；Continuous；years",
+    "Sex": "Sex；Binary；Male/Female",
+    "Baseline_SBP": "Baseline SBP；Continuous；mmHg",
+    "Week12_SBP": "12-week SBP；Continuous；mmHg"
+  }
+}

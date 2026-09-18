@@ -1,0 +1,13 @@
+# D07 学生AI Prompt
+
+目标：评价Biomarker对Disease的诊断区分能力。
+
+规则：
+1. Split已经预先分成Train和Test，不允许合并后再选阈值；
+2. 在Train中计算ROC/AUC并选择Youden指数最佳阈值；
+3. 将**同一个训练集阈值**固定应用到Test；
+4. 分别报告Train和Test的AUC、敏感度、特异度、PPV、NPV；
+5. 解释为什么不能在Test里重新挑一个“最好阈值”后再声称验证成功；
+6. 讨论AUC和临床价值的区别；
+7. 解释患病率为什么会影响PPV/NPV；
+8. 给出R代码。优先提供不依赖额外包的实现；若使用pROC，请同时给出替代方法。

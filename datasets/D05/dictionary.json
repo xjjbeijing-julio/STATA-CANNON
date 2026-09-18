@@ -1,0 +1,13 @@
+{
+  "description": "与119页V3课件配套的原始学生数据：D05_ClinicalOutcome_student.csv。保留未经清洗的教学记录。",
+  "fields": {
+    "ID": "Participant ID；Identifier；O001...；Do not model",
+    "Age": "Age；Continuous；years；Confounder/covariate",
+    "Sex": "Sex；Binary；Male/Female；Covariate",
+    "BMI": "BMI；Continuous；kg/m^2；Covariate",
+    "Smoking": "Current smoking；Binary；Current/No；Covariate",
+    "Stage": "Disease stage；Ordered categorical；1-4；Strong confounder",
+    "Treatment": "Treatment intensity；Binary；Intensive/Standard；Exposure",
+    "Complication": "Post-treatment complication；Binary；1=yes,0=no；Outcome"
+  }
+}
