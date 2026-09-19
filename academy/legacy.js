@@ -410,7 +410,7 @@ function startCannonGame(topicId) {
     selectedDifficulty = diffSel ? diffSel.value : 'all';
     if (selectedModule !== 'all') qs = qs.filter(q => q.moduleId === selectedModule);
     if (selectedTopic !== 'all') qs = qs.filter(q => q.topicId === selectedTopic);
-    if (selectedDifficulty === 'weak') qs = getWeakQuestions(getAllQuestions().length).filter(q => selectedModule === 'all' || q.moduleId === selectedModule).filter(q => selectedTopic === 'all' || q.topicId === selectedTopic);
+    if (selectedDifficulty === 'weak') qs = getWeakQuestions(60).filter(q => selectedModule === 'all' || q.moduleId === selectedModule).filter(q => selectedTopic === 'all' || q.topicId === selectedTopic);
   }
   state.settings.lastCannon = { module: selectedModule, topic: selectedTopic, difficulty: selectedDifficulty };
   try { localStorage.setItem('statcannon_settings', JSON.stringify(state.settings)); } catch(e) {}
